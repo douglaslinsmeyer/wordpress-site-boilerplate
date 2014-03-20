@@ -1,3 +1,5 @@
 /core
 /vendor
 /composer.lock
+/parameters.yml
+/.htaccess
