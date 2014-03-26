@@ -1,0 +1,7 @@
+parameters:
+  environment: dev
+  db_name: wordpress
+  db_user: dbuser
+  db_password: ""
+  db_host: 127.0.0.1
+  wp_home: http://domain.com/

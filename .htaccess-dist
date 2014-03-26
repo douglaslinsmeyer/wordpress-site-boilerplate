@@ -1,0 +1,18 @@
+set env ENVIRONMENT
+
+RewriteEngine on
+RewriteBase /
+
+RewriteCond %{HTTP_HOST} ^(www.)?{SITEURL}$
+RewriteCond %{REQUEST_URI} !^core/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ core/$1
+RewriteCond %{HTTP_HOST} ^(www.)?{SITEURL}$
+RewriteRule ^(/)?$ core/index.php [L]
+
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+
