@@ -1,5 +1,5 @@
-/core
+/public/wp-core
+/public/.htaccess
 /vendor
 /composer.lock
 /parameters.yml
-/.htaccess
