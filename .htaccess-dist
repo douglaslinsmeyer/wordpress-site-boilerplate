@@ -1,18 +1,13 @@
-set env ENVIRONMENT
+setenv ENVIRONMENT {ENVIRONMENT}
 
 RewriteEngine on
-RewriteBase /
+RewriteBase {REWRITE_BASE}
 
-RewriteCond %{HTTP_HOST} ^(www.)?{SITEURL}$
-RewriteCond %{REQUEST_URI} !^core/
+RewriteCond %{HTTP_HOST} ^(www.)?{SITE_HOST}$
+RewriteCond %{REQUEST_URI} !^wp-core/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ core/$1
-RewriteCond %{HTTP_HOST} ^(www.)?{SITEURL}$
-RewriteRule ^(/)?$ core/index.php [L]
-
-RewriteRule ^index\.php$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
+RewriteRule ^(.*)$ wp-core/$1
+RewriteCond %{HTTP_HOST} ^(www.)?{SITE_HOST}$
+RewriteRule ^(/)?$ wp-core/index.php [L]
 

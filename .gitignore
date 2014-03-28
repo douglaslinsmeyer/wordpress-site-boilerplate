@@ -1,4 +1,4 @@
-/public/wp-core
+wp-core
 /public/.htaccess
 /vendor
 /composer.lock

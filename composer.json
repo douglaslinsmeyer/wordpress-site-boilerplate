@@ -27,12 +27,13 @@
         "php": ">=5.4.0",
         "wordpress": "3.8",
         "fancyguy/webroot-installer": "1.0.0",
-        "orno/config": "dev-master",
-        "incenteev/composer-parameter-handler": "~2.0"
+        "incenteev/composer-parameter-handler": "~2.0",
+        "dlinsmey/composer-installer": "1.0.*@dev"
     },
     "scripts": {
         "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Dlinsmeyer\\Composer\\Installer::run"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
@@ -47,7 +48,15 @@
         },
         "incenteev-parameters": {
             "file": "parameters.yml",
-            "dist-file": "parameters-dist.yml"
+            "dist-file": "parameters-dist.yml",
+            "parameter-key": "parameters"
+        },
+        "dlinsmeyer-installer": {
+            "config-file": "parameters.yml",
+            "htaccess": {
+                "dist-file": ".htaccess-dist",
+                "file": "public/.htaccess"
+            }
         }
     }
 }

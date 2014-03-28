@@ -13,9 +13,10 @@
 
 require_once 'vendor/autoload.php';
 
-$loader = new \Orno\Config\File\YamlFileLoader(dirname(__FILE__) . '/parameters.yml');
-$respository = new \Orno\Config\Repository();
-$config = $repository->addFileLoader($loader);
+$yamlParser = new Symfony\Component\Yaml\Parser();
+$environmentConfig = $yamlParser->parse(
+    file_get_contents('parameters.yml')
+);
 
 /**
  * Home & site URL.
@@ -23,10 +24,10 @@ $config = $repository->addFileLoader($loader);
  * This will override the home/site URL settings
  * in the General Settings of wp-admin.
  */
-define('WP_HOME', $config->get('wp_home'));
-define('WP_SITEURL', WP_HOME);
+define('WP_HOME', $environmentConfig['wp_home']);
+define('WP_SITEURL', $environmentConfig['wp_home']);
 
-define('DB_NAME', 'summitortho');
+define('DB_NAME', $environmentConfig['db_name']);
 
 // Database username
 define('DB_USER', $config->get('db_user'));
