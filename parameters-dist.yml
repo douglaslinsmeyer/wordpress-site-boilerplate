@@ -1,9 +1,20 @@
 parameters:
   environment: dev
+  wp_home: http://domain.com/
+  site_host: domain.com
+  rewrite_base: /
   db_name: wordpress
   db_user: dbuser
   db_password: ""
   db_host: 127.0.0.1
-  wp_home: http://domain.com/
-  site_host: domain.com
-  rewrite_base: /
+  db_charset: utf8
+  table_prefix: nrdwp_
+  wp_lang: en_US
+  auth_key: ThisIsNotSoSecretYouShouldProbablyChangeIt
+  secure_auth_key: ThisIsNotSoSecretYouShouldProbablyChangeIt
+  logged_in_key: ThisIsNotSoSecretYouShouldProbablyChangeIt
+  nonce_key: ThisIsNotSoSecretYouShouldProbablyChangeIt
+  auth_salt: ThisIsNotSoSecretYouShouldProbablyChangeIt
+  secure_auth_salt: ThisIsNotSoSecretYouShouldProbablyChangeIt
+  logged_in_salt: ThisIsNotSoSecretYouShouldProbablyChangeIt
+  nonce_salt: ThisIsNotSoSecretYouShouldProbablyChangeIt

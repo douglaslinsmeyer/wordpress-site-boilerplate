@@ -11,3 +11,8 @@ RewriteRule ^(.*)$ wp-core/$1
 RewriteCond %{HTTP_HOST} ^(www.)?{SITE_HOST}$
 RewriteRule ^(/)?$ wp-core/index.php [L]
 
+# Permalinks
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]

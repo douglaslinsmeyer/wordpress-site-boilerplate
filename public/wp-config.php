@@ -11,12 +11,27 @@
  * @link     http://client-website.com
  */
 
-require_once 'vendor/autoload.php';
+/*
+ * Load the Composer autoloader
+ *
+ * This will allow us to autoload any libraries or packages
+ * that we may need for our installation.
+ */
+require_once dirname(__FILE__) . '/../vendor/autoload.php';
 
+/*
+ * Load the environment configuration
+ *
+ * Instead of hard-coding the environment variables here in the wp-config.php
+ * file, environment specific configuration settings are kept in a
+ * parameters.yml file outside of the web root. Here we load that file and set
+ * the configuration values.
+ */
 $yamlParser = new Symfony\Component\Yaml\Parser();
 $environmentConfig = $yamlParser->parse(
-    file_get_contents('parameters.yml')
+    file_get_contents(dirname(__FILE__) . '/../parameters.yml')
 );
+$environmentConfig = $environmentConfig['parameters'];
 
 /**
  * Home & site URL.
@@ -30,16 +45,16 @@ define('WP_SITEURL', $environmentConfig['wp_home']);
 define('DB_NAME', $environmentConfig['db_name']);
 
 // Database username
-define('DB_USER', $config->get('db_user'));
+define('DB_USER', $environmentConfig['db_user']);
 
 // Database password
-define('DB_PASSWORD', 'toor');
+define('DB_PASSWORD', $environmentConfig['db_password']);
 
 // Database host (usually 'localhost')
-define('DB_HOST', '127.0.0.1');
+define('DB_HOST', $environmentConfig['db_host']);
 
 // Database character set
-define('DB_CHARSET', 'utf8');
+define('DB_CHARSET', $environmentConfig['db_charset']);
 
 // The database collation. Leave this blank unless otherwise required.
 define('DB_COLLATE', '');
@@ -53,14 +68,14 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         ';{1zJw^n:EhAKT(Cr=Wyvu#(5=-.=2X0[M]M} cb->CTKjuGn]y#A?8}WNoLF dg');
-define('SECURE_AUTH_KEY',  '`veE:26Sl@YvRC{0_c_4,9Q,;B{d_Eo8=d}pEFK6h3&-_</=+!?uo<XH_DXJ-8(S');
-define('LOGGED_IN_KEY',    'm?[)-iSc:t^>P:|6!*2k:lh/q]yV/Tu@)M|64c<eG-]{r!+j RIMvItc?x}7QO|e');
-define('NONCE_KEY',        'a5$!(DOIu-c%>Z wiY$s^<3`33RzCao@rR_?C|>[CSOBnzO`|CA5|F[l55n0{-9J');
-define('AUTH_SALT',        'dTpON|HE|ANu|:7:XaxoCZZttH^W<GTv#pig- }_bYY!-+9r97f~]yF r@xwOR!|');
-define('SECURE_AUTH_SALT', '?v4D$ki(L@bH:!j5:tZKQdv,+FNXSEe`1+gH)z?d;b%q]I9WiqFL|;,*)yAXLi=8');
-define('LOGGED_IN_SALT',   'EgC:wJkXS7`^W6u1l~X8lsG7+@epS,9j{rN;#-WZNE.x?Oj^2f-W7<{o, (YqwN#');
-define('NONCE_SALT',       'b]X#$D^gQ_>M(kHB+??6+4h?R)TlBF<+7%0*;m-]F%cge6(uj]tU+Y)3[H>kV|[V');
+define('AUTH_KEY', $environmentConfig['auth_key']);
+define('SECURE_AUTH_KEY', $environmentConfig['secure_auth_key']);
+define('LOGGED_IN_KEY', $environmentConfig['logged_in_key']);
+define('NONCE_KEY', $environmentConfig['nonce_key']);
+define('AUTH_SALT', $environmentConfig['auth_salt']);
+define('SECURE_AUTH_SALT', $environmentConfig['secure_auth_salt']);
+define('LOGGED_IN_SALT', $environmentConfig['logged_in_salt']);
+define('NONCE_SALT', $environmentConfig['nonce_salt']);
 /**#@-*/
 
 /**
@@ -69,7 +84,7 @@ define('NONCE_SALT',       'b]X#$D^gQ_>M(kHB+??6+4h?R)TlBF<+7%0*;m-]F%cge6(uj]tU
  * You can have multiple installations in one database if you give each a unique
  * prefix. Only numbers, letters, and underscores please!
  */
-$table_prefix  = 'nrdwp_';
+$table_prefix  = $environmentConfig['table_prefix'];
 
 /**
  * WordPress Localized Language, defaults to English.
@@ -79,7 +94,7 @@ $table_prefix  = 'nrdwp_';
  * de.mo to wp-content/languages and set WPLANG to 'de' to enable German
  * language support.
  */
-define('WPLANG', '');
+define('WPLANG', $environmentConfig['wp_lang']);
 
 
 /**
@@ -88,8 +103,8 @@ define('WPLANG', '');
  * For WordPress installations using SVN externals and keeping the
  * content directory separate from WordPress core code.
  */
-define('WP_CONTENT_DIR', dirname(__FILE__) . '/content');
-define('WP_CONTENT_URL', 'http://summit-ortho.dev/content');
+define('WP_CONTENT_DIR', dirname(__FILE__) . '/wp-content');
+define('WP_CONTENT_URL', $environmentConfig['wp_home'] . '/wp-content');
 
 /**
  * Admin cookie path.

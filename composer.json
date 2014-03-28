@@ -8,6 +8,10 @@
     },
     "repositories": [
         {
+            "type": "composer",
+            "url": "http://wpackagist.org"
+        },
+        {
             "type": "package",
             "package": {
                 "name": "wordpress",
